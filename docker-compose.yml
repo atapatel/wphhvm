@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  front_app:
+    build:
+      context: .
+      dockerfile: docker-php/Dockerfile
+    volumes:
+      - ./:/srv/app
+    ports:
+      - '8082:80'
+  
+  hhvm_app:
+    build:
+      context: .
+      dockerfile: docker-hhvm/Dockerfile
+    volumes:
+      - ./:/var/www/app
+    expose:
+      - '9000'
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - ./:/var/www/app
+    ports:
+        - "8081:80"
+    links:
+        - hhvm_app
+
+  mysql: 
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQL_DATABASE: wordpress
+    volumes:
+      - ~/data:/var/lib/mysql
