@@ -32,7 +32,7 @@
  * as indicating support for post thumbnails.
  */
 function twentytwenty_theme_support() {
-
+	
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
 

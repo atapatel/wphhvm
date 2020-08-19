@@ -5,6 +5,7 @@
  * @package WordPress
  * @subpackage Administration
  */
+date_default_timezone_set("Asia/Bangkok");
 
 /** Load WordPress Bootstrap */
 require_once __DIR__ . '/admin.php';

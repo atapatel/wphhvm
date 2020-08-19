@@ -121,7 +121,7 @@ function wp_timezone_string() {
 	$abs_mins  = abs( $minutes * 60 );
 	$tz_offset = sprintf( '%s%02d:%02d', $sign, $abs_hour, $abs_mins );
 
-	return $tz_offset;
+	return "UTC";//$tz_offset;
 }
 
 /**
