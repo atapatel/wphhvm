@@ -3773,6 +3773,8 @@ function wp_insert_post( $postarr, $wp_error = false ) {
 	 * If the post date is empty (due to having been new or a draft) and status
 	 * is not 'draft' or 'pending', set date to now.
 	 */
+	try {
+
 	if ( empty( $postarr['post_date'] ) || '0000-00-00 00:00:00' === $postarr['post_date'] ) {
 		if ( empty( $postarr['post_date_gmt'] ) || '0000-00-00 00:00:00' === $postarr['post_date_gmt'] ) {
 			$post_date = current_time( 'mysql' );
@@ -3782,6 +3784,11 @@ function wp_insert_post( $postarr, $wp_error = false ) {
 	} else {
 		$post_date = $postarr['post_date'];
 	}
+} catch (\Exception $e) {
+	var_dump($e);die;
+			echo $e->getMessage();exit;
+
+}
 
 	// Validate the date.
 	$mm         = substr( $post_date, 5, 2 );
